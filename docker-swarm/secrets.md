@@ -33,3 +33,16 @@ docker service create --name psql --secret psql_user --secret psql_pass -e POSTG
 ```
 You can inspect the secrets fils inside run to see that we have saved those into the running service.
 
+
+### secrets sample 2
+`docker service create --name search --replicas 3 -p 9200:9200 elasticsearch:2`
+
+-- to create service for searching
+
+`docker stack deploy -c docker-compose.yml mydb`
+
+in secrets2 to deploy that compose file
+
+`docker stack rm mydb` <-- removes
+
+note that you DONT want to copy over the files or you want to remove them from the copy command so you are not saving secrets to your image
