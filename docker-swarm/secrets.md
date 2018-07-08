@@ -20,3 +20,16 @@ looks like file, but in memory only. RAM fs file
 `/run/secrets/<secret_name>`
 `/run/secrets/<secret_alias>`
 
+### secrets
+`docker secret create psql_user psql_user.txt`
+spits back ID: y7lb4klih9tzenh5bazy8j1ae
+-- first stores it on host, bash history for root user
+
+`echo "myDBpassWORD" | docker secret create psql_pass -`
+read from standard input
+
+```sh
+docker service create --name psql --secret psql_user --secret psql_pass -e POSTGRES_PASSWORD_FILE=/run/secrets/psql_pass -e POSTGRES_USER_FILE=/run/secrets/psql_user postgres
+```
+You can inspect the secrets fils inside run to see that we have saved those into the running service.
+
